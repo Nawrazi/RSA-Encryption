@@ -76,9 +76,7 @@ def decrypt(encryptedMessage, secretKey):
     originalMessage = ""
 
     for number in encryptedMessage:
-        number = int(number)
         originalNumber = (number**d)%n
-
         originalMessage += chr(originalNumber)
 
     return originalMessage

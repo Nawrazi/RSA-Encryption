@@ -40,7 +40,7 @@ def pulverizer(a,b):
 
 # Generates a secret key and a public key
 def keyGen():
-    numberOfDigits = 3
+    numberOfDigits = 2
     p = primeGenerator(numberOfDigits)        # First random prime number
     q = primeGenerator(numberOfDigits)        # Second random prime number
 

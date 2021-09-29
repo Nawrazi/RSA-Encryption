@@ -40,12 +40,12 @@ def pulverizer(a,b):
 
 # Generates a secret key and a public key
 def keyGen():
-    numberOfDigits = 2
+    numberOfDigits = 7
     p = primeGenerator(numberOfDigits)        # First random prime number
     q = primeGenerator(numberOfDigits)        # Second random prime number
 
     n = p*q
-    r = (p-1)*(q-1)              # Euler's Totient
+    r = (p-1)*(q-1)                           # Euler's Totient
     e = primeGenerator(numberOfDigits)**2     # A number that is highly likely to be relatively prime with r
 
     publicKey = (e,n)
@@ -66,7 +66,7 @@ def encrypt(message, publicKey):
         if gcd(letter,n) != 1:
             raise Exception('UNEXPECTED ERROR, TRY AGAIN')  # For security, but highly unlikely to happen
 
-        encryptedLetter = (letter**e)%n
+        encryptedLetter = pow(letter, e, n)
         encryptedMessage.append(encryptedLetter)
 
     return encryptedMessage
@@ -76,21 +76,22 @@ def decrypt(encryptedMessage, secretKey):
     originalMessage = ""
 
     for number in encryptedMessage:
-        originalNumber = (number**d)%n
+        originalNumber = pow(number, d, n)
         originalMessage += chr(originalNumber)
 
     return originalMessage
 
 def main():
+    message = input("Input the message to encrypt: ")
+
     secretKey, publicKey = keyGen()
 
-    message = input("Input the message to encrypt: ")
     encryptedMessage = encrypt(message,publicKey)
     print('*'*100)
     print("Encrypted text:", encryptedMessage)
     print("The secret key is:", secretKey)
 
     originalMessage = decrypt(encryptedMessage,secretKey)
-    print("Original Text:", originalMessage)
+    print("\nDecrypted Text:", originalMessage)
 
 main()

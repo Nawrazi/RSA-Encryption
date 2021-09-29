@@ -1,9 +1,11 @@
 import random
 
 def isPrime(x):
-    for i in range(2, (x//2)+1):
+    i = 2
+    while i*i < x:
         if x%i==0:
             return False
+        i+=1
     return True
 
 # Generates an n-digit prime number
@@ -40,7 +42,7 @@ def pulverizer(a,b):
 
 # Generates a secret key and a public key
 def keyGen():
-    numberOfDigits = 7
+    numberOfDigits = 10
     p = primeGenerator(numberOfDigits)        # First random prime number
     q = primeGenerator(numberOfDigits)        # Second random prime number
 
@@ -87,9 +89,9 @@ def main():
     secretKey, publicKey = keyGen()
 
     encryptedMessage = encrypt(message,publicKey)
-    print('*'*100)
-    print("Encrypted text:", encryptedMessage)
-    print("The secret key is:", secretKey)
+    # print('*'*100)
+    print("\nEncrypted text:", encryptedMessage)
+    print("\nThe secret key is:", secretKey)
 
     originalMessage = decrypt(encryptedMessage,secretKey)
     print("\nDecrypted Text:", originalMessage)

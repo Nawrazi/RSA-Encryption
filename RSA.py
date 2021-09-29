@@ -2,7 +2,7 @@ import random
 
 def isPrime(x):
     i = 2
-    while i*i < x:
+    while i*i < x:          # Only checks for factors up to the square root of x
         if x%i==0:
             return False
         i+=1
@@ -16,20 +16,13 @@ def primeGenerator(n):
         string += str(x)
     number = int(string)
 
-    if number%2==0:
+    if number%2==0:         # Eliminating even numbers
         number+=1
 
     while True:
         if isPrime(number):
             return number
         number+=2
-
-# Finds the GCD of x and y using Euclid's Algorithm
-def gcd(x,y):
-    if y==0:
-        return x
-    else:
-        return gcd(y,x%y)
 
 # Finds the multiplicative inverse of a mod b
 def pulverizer(a,b):
@@ -61,20 +54,17 @@ def keyGen():
     return secretKey, publicKey
 
 def encrypt(message, publicKey):
-    e,n = publicKey
+    (e,n) = publicKey
     encryptedMessage = []
     for letter in message:
         letter = ord(letter)
-        if gcd(letter,n) != 1:
-            raise Exception('UNEXPECTED ERROR, TRY AGAIN')  # For security, but highly unlikely to happen
-
         encryptedLetter = pow(letter, e, n)
         encryptedMessage.append(encryptedLetter)
 
     return encryptedMessage
 
 def decrypt(encryptedMessage, secretKey):
-    d,n = secretKey
+    (d,n) = secretKey
     originalMessage = ""
 
     for number in encryptedMessage:
@@ -89,7 +79,7 @@ def main():
     secretKey, publicKey = keyGen()
 
     encryptedMessage = encrypt(message,publicKey)
-    # print('*'*100)
+
     print("\nEncrypted text:", encryptedMessage)
     print("\nThe secret key is:", secretKey)
 

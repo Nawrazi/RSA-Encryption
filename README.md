@@ -1,15 +1,8 @@
-# RSA-Encryption
+# Discrete Mathematics Assignment: RSA-Encryption
 
-Addis Ababa University
-
-AAiT
-
-Discrete Mathematics Assignment
+# Addis Ababa University, AAiT
 
 This project is an implementation of the RSA Encryption Algorithm.
-
-
-
 
 Contributors:
 

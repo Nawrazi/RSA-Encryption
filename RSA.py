@@ -2,7 +2,7 @@ import random
 
 def isPrime(x):
     i = 2
-    while i*i < x:          # Only checks for factors up to the square root of x
+    while i*i <= x:          # Only checks for factors up to the square root of x
         if x%i==0:
             return False
         i+=1
